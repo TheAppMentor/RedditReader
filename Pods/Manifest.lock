@@ -1,0 +1,18 @@
+PODS:
+  - CircleMenu (1.0.0)
+  - RAMReel (1.2.3)
+  - SlideMenuControllerSwift (2.1.1)
+
+DEPENDENCIES:
+  - CircleMenu (~> 1.0.0)
+  - RAMReel
+  - SlideMenuControllerSwift
+
+SPEC CHECKSUMS:
+  CircleMenu: d67d88395705c20c23806632987288b39fbfc690
+  RAMReel: cbef0ec48f9860f393dd0f97babd3ca50813c478
+  SlideMenuControllerSwift: 82ada9b04e03538c84d034cf1c09e5849c0113f7
+
+PODFILE CHECKSUM: 18b95209d0e5080ca728f4c99baffc0684044ad7
+
+COCOAPODS: 1.0.0

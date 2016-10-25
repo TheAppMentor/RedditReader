@@ -10,43 +10,6 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>151AD90E7AE1AE9E34A2F435</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-RedditReader/Pods-RedditReader-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>2DAFE1F961970D385D06C88D</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_RedditReader.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
 		<key>2F5AED1C1D4129B90092243F</key>
 		<dict>
 			<key>fileEncoding</key>
@@ -189,44 +152,12 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>462FBE487B5BB64B6A7CC7CB</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
 		<key>88C8082E1D3EA18D00501729</key>
 		<dict>
 			<key>children</key>
 			<array>
 				<string>88C808391D3EA18D00501729</string>
 				<string>88C808381D3EA18D00501729</string>
-				<string>95E2BD337F0DF084FEBB763D</string>
-				<string>FA90A00F2AD429E2EB9B042E</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -249,8 +180,12 @@ fi
 					<dict>
 						<key>CreatedOnToolsVersion</key>
 						<string>7.2.1</string>
+						<key>DevelopmentTeam</key>
+						<string>TLV25NDMDF</string>
 						<key>LastSwiftMigration</key>
 						<string>0800</string>
+						<key>ProvisioningStyle</key>
+						<string>Automatic</string>
 					</dict>
 				</dict>
 			</dict>
@@ -323,9 +258,7 @@ fi
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
-			<array>
-				<string>FC58717E8ABC2B76C28CAEC1</string>
-			</array>
+			<array/>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
@@ -352,12 +285,9 @@ fi
 			<string>88C808491D3EA18D00501729</string>
 			<key>buildPhases</key>
 			<array>
-				<string>462FBE487B5BB64B6A7CC7CB</string>
 				<string>88C808331D3EA18D00501729</string>
 				<string>88C808341D3EA18D00501729</string>
 				<string>88C808351D3EA18D00501729</string>
-				<string>151AD90E7AE1AE9E34A2F435</string>
-				<string>A1C08CFC90314E86B16DAFF4</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -718,14 +648,18 @@ fi
 		</dict>
 		<key>88C8084A1D3EA18D00501729</key>
 		<dict>
-			<key>baseConfigurationReference</key>
-			<string>AE87159BBF6F8EC311000972</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
 				<string>YES</string>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
 				<string>AppIcon</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>TLV25NDMDF</string>
 				<key>INFOPLIST_FILE</key>
 				<string>RedditReader/Info.plist</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
@@ -746,14 +680,18 @@ fi
 		</dict>
 		<key>88C8084B1D3EA18D00501729</key>
 		<dict>
-			<key>baseConfigurationReference</key>
-			<string>B46B60DD4CE0F3B3E648575C</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
 				<string>YES</string>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
 				<string>AppIcon</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>TLV25NDMDF</string>
 				<key>INFOPLIST_FILE</key>
 				<string>RedditReader/Info.plist</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
@@ -771,94 +709,6 @@ fi
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Release</string>
-		</dict>
-		<key>95E2BD337F0DF084FEBB763D</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>AE87159BBF6F8EC311000972</string>
-				<string>B46B60DD4CE0F3B3E648575C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A1C08CFC90314E86B16DAFF4</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-RedditReader/Pods-RedditReader-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>AE87159BBF6F8EC311000972</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-RedditReader.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-RedditReader/Pods-RedditReader.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B46B60DD4CE0F3B3E648575C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-RedditReader.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-RedditReader/Pods-RedditReader.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FA90A00F2AD429E2EB9B042E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>2DAFE1F961970D385D06C88D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FC58717E8ABC2B76C28CAEC1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2DAFE1F961970D385D06C88D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

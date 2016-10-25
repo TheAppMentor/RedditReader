@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SlideMenuControllerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,10 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //theMainFeedVCNav.navigationBar.setBackgroundImage(UIImage(named:"bg header")!, forBarMetrics: .Default)
         }
     
-        
-        let slideMenuController = SlideMenuController(mainViewController: theMainFeedVC, leftMenuViewController: theLeftMenuVC, rightMenuViewController: UIViewController())
-        self.window?.rootViewController = slideMenuController
-        self.window?.makeKeyAndVisible()
         
         return true
     }

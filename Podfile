@@ -7,6 +7,4 @@ target 'RedditReader' do
 
   # Pods for RedditReader
   pod 'SlideMenuControllerSwift'
-  #pod 'RAMReel'
-  #pod 'CircleMenu', '~> 1.0.0'
 end

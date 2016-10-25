@@ -23,6 +23,7 @@ public struct SlideMenuOptions {
     public static var leftBezelWidth: CGFloat? = 16.0
     public static var contentViewScale: CGFloat = 0.96
     public static var contentViewOpacity: CGFloat = 0.5
+    public static var contentViewDrag: Bool = false
     public static var shadowOpacity: CGFloat = 0.0
     public static var shadowRadius: CGFloat = 0.0
     public static var shadowOffset: CGSize = CGSize(width: 0,height: 0)
@@ -185,6 +186,11 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         edgesForExtendedLayout = UIRectEdge()
     }
+
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.mainViewController?.viewWillAppear(animated)
+    }
     
     open override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
         if let mainController = self.mainViewController{
@@ -193,6 +199,10 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         return UIInterfaceOrientationMask.all
     }
     
+    open override var shouldAutorotate : Bool {
+        return mainViewController?.shouldAutorotate ?? false
+    }
+        
     open override func viewWillLayoutSubviews() {
         // topLayoutGuideの値が確定するこのタイミングで各種ViewControllerをセットする
         setUpViewController(mainContainerView, targetViewController: mainViewController)
@@ -238,7 +248,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         
         leftViewController?.beginAppearanceTransition(isLeftHidden(), animated: true)
         closeLeftWithVelocity(0.0)
-        setCloseWindowLebel()
+        setCloseWindowLevel()
     }
     
     open override func closeRight() {
@@ -250,7 +260,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         
         rightViewController?.beginAppearanceTransition(isRightHidden(), animated: true)
         closeRightWithVelocity(0.0)
-        setCloseWindowLebel()
+        setCloseWindowLevel()
     }
     
     
@@ -374,6 +384,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
                 applyLeftContentViewScale()
             case UIGestureRecognizerState.ended, UIGestureRecognizerState.cancelled:
                 if LeftPanState.lastState != .changed {
+                    setCloseWindowLevel()
                     return
                 }
                 
@@ -392,7 +403,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
                         leftViewController?.beginAppearanceTransition(false, animated: true)
                     }
                     closeLeftWithVelocity(panInfo.velocity)
-                    setCloseWindowLebel()
+                    setCloseWindowLevel()
                     
                     track(.leftFlickClose)
 
@@ -455,6 +466,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
             
         case UIGestureRecognizerState.ended, UIGestureRecognizerState.cancelled:
             if RightPanState.lastState != .changed {
+                setCloseWindowLevel()
                 return
             }
             
@@ -473,7 +485,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
                     rightViewController?.beginAppearanceTransition(false, animated: true)
                 }
                 closeRightWithVelocity(panInfo.velocity)
-                setCloseWindowLebel()
+                setCloseWindowLevel()
                 
                 track(.rightFlickClose)
             }
@@ -503,7 +515,9 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let strongSelf = self {
                 strongSelf.leftContainerView.frame = frame
                 strongSelf.opacityView.layer.opacity = Float(SlideMenuOptions.contentViewOpacity)
-                strongSelf.mainContainerView.transform = CGAffineTransform(scaleX: SlideMenuOptions.contentViewScale, y: SlideMenuOptions.contentViewScale)
+              
+                SlideMenuOptions.contentViewDrag == true ? (strongSelf.mainContainerView.transform = CGAffineTransform(translationX: SlideMenuOptions.leftViewWidth, y: 0)) : (strongSelf.mainContainerView.transform = CGAffineTransform(scaleX: SlideMenuOptions.contentViewScale, y: SlideMenuOptions.contentViewScale))
+                
             }
             }) { [weak self](Bool) -> Void in
                 if let strongSelf = self {
@@ -535,7 +549,8 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let strongSelf = self {
                 strongSelf.rightContainerView.frame = frame
                 strongSelf.opacityView.layer.opacity = Float(SlideMenuOptions.contentViewOpacity)
-                strongSelf.mainContainerView.transform = CGAffineTransform(scaleX: SlideMenuOptions.contentViewScale, y: SlideMenuOptions.contentViewScale)
+            
+                SlideMenuOptions.contentViewDrag == true ? (strongSelf.mainContainerView.transform = CGAffineTransform(translationX: -SlideMenuOptions.rightViewWidth, y: 0)) : (strongSelf.mainContainerView.transform = CGAffineTransform(scaleX: SlideMenuOptions.contentViewScale, y: SlideMenuOptions.contentViewScale))
             }
             }) { [weak self](Bool) -> Void in
                 if let strongSelf = self {
@@ -611,7 +626,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open override func toggleLeft() {
         if isLeftOpen() {
             closeLeft()
-            setCloseWindowLebel()
+            setCloseWindowLevel()
             // Tracking of close tap is put in here. Because closeMenu is due to be call even when the menu tap.
             
             track(.leftTapClose)
@@ -631,7 +646,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open override func toggleRight() {
         if isRightOpen() {
             closeRight()
-            setCloseWindowLebel()
+            setCloseWindowLevel()
             
             // Tracking of close tap is put in here. Because closeMenu is due to be call even when the menu tap.
             track(.rightTapClose)
@@ -822,13 +837,17 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate func applyLeftContentViewScale() {
         let openedLeftRatio: CGFloat = getOpenedLeftRatio()
         let scale: CGFloat = 1.0 - ((1.0 - SlideMenuOptions.contentViewScale) * openedLeftRatio);
-        mainContainerView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        let drag: CGFloat = SlideMenuOptions.leftViewWidth + leftContainerView.frame.origin.x
+        
+        SlideMenuOptions.contentViewDrag == true ? (mainContainerView.transform = CGAffineTransform(translationX: drag, y: 0)) : (mainContainerView.transform = CGAffineTransform(scaleX: scale, y: scale))
     }
     
     fileprivate func applyRightContentViewScale() {
         let openedRightRatio: CGFloat = getOpenedRightRatio()
         let scale: CGFloat = 1.0 - ((1.0 - SlideMenuOptions.contentViewScale) * openedRightRatio)
-        mainContainerView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        let drag: CGFloat = rightContainerView.frame.origin.x - mainContainerView.frame.size.width
+        
+        SlideMenuOptions.contentViewDrag == true ? (mainContainerView.transform = CGAffineTransform(translationX: drag, y: 0)) : (mainContainerView.transform = CGAffineTransform(scaleX: scale, y: scale))
     }
     
     fileprivate func addShadowToView(_ targetContainerView: UIView) {
@@ -871,7 +890,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    fileprivate func setCloseWindowLebel() {
+    fileprivate func setCloseWindowLevel() {
         if (SlideMenuOptions.hideStatusBar) {
             DispatchQueue.main.async(execute: {
                 if let window = UIApplication.shared.keyWindow {
@@ -901,7 +920,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     open func closeLeftNonAnimation(){
-        setCloseWindowLebel()
+        setCloseWindowLevel()
         let finalXOrigin: CGFloat = leftMinOrigin()
         var frame: CGRect = leftContainerView.frame;
         frame.origin.x = finalXOrigin
@@ -913,7 +932,7 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     open func closeRightNonAnimation(){
-        setCloseWindowLebel()
+        setCloseWindowLevel()
         let finalXOrigin: CGFloat = view.bounds.width
         var frame: CGRect = rightContainerView.frame
         frame.origin.x = finalXOrigin
@@ -954,9 +973,8 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate func isLeftPointContainedWithinBezelRect(_ point: CGPoint) -> Bool{
         if let bezelWidth = SlideMenuOptions.leftBezelWidth {
             var leftBezelRect: CGRect = CGRect.zero
-            var tempRect: CGRect = CGRect.zero
-        
-            CGRectDivide(view.bounds, &leftBezelRect, &tempRect, bezelWidth, CGRectEdge.minXEdge)
+            let tuple = view.bounds.divided(atDistance: bezelWidth, from: CGRectEdge.minXEdge)
+            leftBezelRect = tuple.slice
             return leftBezelRect.contains(point)
         } else {
             return true
@@ -976,11 +994,9 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate func isRightPointContainedWithinBezelRect(_ point: CGPoint) -> Bool {
         if let rightBezelWidth = SlideMenuOptions.rightBezelWidth {
             var rightBezelRect: CGRect = CGRect.zero
-            var tempRect: CGRect = CGRect.zero
             let bezelWidth: CGFloat = view.bounds.width - rightBezelWidth
-        
-            CGRectDivide(view.bounds, &tempRect, &rightBezelRect, bezelWidth, CGRectEdge.minXEdge)
-        
+            let tuple = view.bounds.divided(atDistance: bezelWidth, from: CGRectEdge.minXEdge)
+            rightBezelRect = tuple.remainder
             return rightBezelRect.contains(point)
         } else {
             return true

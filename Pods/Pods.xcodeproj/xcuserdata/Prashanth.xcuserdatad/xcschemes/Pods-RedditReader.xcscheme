@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FE2D18B1AB0B99F80D33797EC976A6BE'
-               BlueprintName = 'SlideMenuControllerSwift'
+               BlueprintIdentifier = '72D64F2CDAAFF065296D5174'
+               BlueprintName = 'Pods-RedditReader'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SlideMenuControllerSwift.framework'>
+               BuildableName = 'Pods_RedditReader.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

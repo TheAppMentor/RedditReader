@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "88C808361D3EA18D00501729"
-               BuildableName = "RedditReader.app"
-               BlueprintName = "RedditReader"
-               ReferencedContainer = "container:RedditReader.xcodeproj">
+               BlueprintIdentifier = "D083682CF36071495A66680CF5CE2BA5"
+               BuildableName = "DrawerController.framework"
+               BlueprintName = "DrawerController"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "88C808361D3EA18D00501729"
-            BuildableName = "RedditReader.app"
-            BlueprintName = "RedditReader"
-            ReferencedContainer = "container:RedditReader.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "88C808361D3EA18D00501729"
-            BuildableName = "RedditReader.app"
-            BlueprintName = "RedditReader"
-            ReferencedContainer = "container:RedditReader.xcodeproj">
+            BlueprintIdentifier = "D083682CF36071495A66680CF5CE2BA5"
+            BuildableName = "DrawerController.framework"
+            BlueprintName = "DrawerController"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "88C808361D3EA18D00501729"
-            BuildableName = "RedditReader.app"
-            BlueprintName = "RedditReader"
-            ReferencedContainer = "container:RedditReader.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

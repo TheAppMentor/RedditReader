@@ -19,8 +19,13 @@ class FeedPageTableViewController: UITableViewController {
     let theRequest = URL(string: "https://www.reddit.com/hot/.json")
     
     @IBAction func openLeftMenu(_ sender: UIBarButtonItem) {
-//        openLeft()
+        
+        self.evo_drawerController?.toggleLeftDrawerSideAnimated(true, completion: { (success) in
+            print("We  have now opened the Drawer")
+        })
     }
+    
+    
     
     override func viewDidLoad() {
         

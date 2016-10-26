@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,8 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let theMainFeedVC = theStoryBoard.instantiateViewController(withIdentifier: "MainScreenNavController")
         let theLeftMenuVC = theStoryBoard.instantiateViewController(withIdentifier: "menuVC")
         
-        window?.rootViewController = theMainFeedVC
-
+        let theDrawerController = DrawerController(centerViewController: theMainFeedVC, leftDrawerViewController: theLeftMenuVC)
+        theDrawerController.openDrawerGestureModeMask = .All
+        theDrawerController.closeDrawerGestureModeMask = .All
+        
+        window?.rootViewController = theDrawerController
         
         if let theMainFeedVCNav = theMainFeedVC as? UINavigationController{
             let theTitleFont = UIFont(name: "Avenir", size: 20.0)

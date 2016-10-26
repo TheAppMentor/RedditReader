@@ -26,7 +26,7 @@ open class FeedStory : CustomStringConvertible{
     init(){
         title = ""
         type = .Comment
-        url = URL(string: "")!
+        url = URL(string: "https://reddit.com/hot.json")!
         score = 0
         comments = 0
         subreddit = ""

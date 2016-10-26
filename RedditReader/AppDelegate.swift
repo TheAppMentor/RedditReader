@@ -23,14 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let theMainFeedVC = theStoryBoard.instantiateViewController(withIdentifier: "MainScreenNavController")
         let theLeftMenuVC = theStoryBoard.instantiateViewController(withIdentifier: "menuVC")
         
+        window?.rootViewController = theMainFeedVC
+
+        
         if let theMainFeedVCNav = theMainFeedVC as? UINavigationController{
             let theTitleFont = UIFont(name: "Avenir", size: 20.0)
             theMainFeedVCNav.navigationBar.titleTextAttributes = [NSFontAttributeName : theTitleFont!]
             theMainFeedVCNav.navigationBar.backgroundColor = UIColor(red: (251.0/255.0), green: (64.0/255.0), blue: (12.0/255.0), alpha: 1.0)
             //theMainFeedVCNav.navigationBar.setBackgroundImage(UIImage(named:"bg header")!, forBarMetrics: .Default)
         }
-    
-        
+            
         return true
     }
 

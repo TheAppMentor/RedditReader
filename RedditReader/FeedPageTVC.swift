@@ -19,7 +19,7 @@ class FeedPageTableViewController: UITableViewController {
     let theRequest = URL(string: "https://www.reddit.com/hot/.json")
     
     @IBAction func openLeftMenu(_ sender: UIBarButtonItem) {
-        openLeft()
+//        openLeft()
     }
     
     override func viewDidLoad() {

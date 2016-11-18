@@ -6,7 +6,8 @@ target 'RedditReader' do
   use_frameworks!
 
   # Pods for RedditReader
-  pod 'DrawerController'
+  pod 'p2.OAuth2', '~> 3.0'
+  #pod 'DrawerController'
   #pod 'SlideMenuControllerSwift'
 
 end

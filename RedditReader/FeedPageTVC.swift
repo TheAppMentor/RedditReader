@@ -20,6 +20,7 @@ class FeedPageTableViewController: UITableViewController {
     
     @IBAction func openLeftMenu(_ sender: UIBarButtonItem) {
 //        openLeft()
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
@@ -38,6 +39,9 @@ class FeedPageTableViewController: UITableViewController {
     
     func refreshTableView() {
         RedditFetcher.sharedFetcher.fetchJSONFromReddit(theRequest!)
+        
+        // OAuth.. forget the tokens.
+        (UIApplication.shared.delegate as? AppDelegate)?.oauth2.forgetTokens()
     }
     
     func updateUI(_ notification : Notification)  {

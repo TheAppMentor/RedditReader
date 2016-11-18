@@ -1,13 +1,64 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JSm-dt-saG">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JSm-dt-saG">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Login Screen-->
+        <scene sceneID="Obo-8J-yas">
+            <objects>
+                <viewController id="LXr-6M-gZ3" customClass="LoginScreen" customModule="RedditReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mlt-Ab-vPp"/>
+                        <viewControllerLayoutGuide type="bottom" id="52Z-Nn-jYo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AVb-s5-eGp">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7b6-cH-d0E">
+                                <rect key="frame" x="98" y="267" width="179" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Go Red"/>
+                                <connections>
+                                    <action selector="GoToReddit:" destination="LXr-6M-gZ3" eventType="touchUpInside" id="25O-5j-m9C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewm-cT-dzn">
+                                <rect key="frame" x="98" y="193" width="179" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginOAuth:" destination="LXr-6M-gZ3" eventType="touchUpInside" id="Dur-qm-X7n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVY-wS-Yyr">
+                                <rect key="frame" x="98" y="344" width="179" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutOAuth:" destination="LXr-6M-gZ3" eventType="touchUpInside" id="VzI-5V-Atn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zU1-1z-aOf"/>
+                    <connections>
+                        <segue destination="mBp-i0-cDs" kind="show" identifier="gotoRedditPage" id="FJW-xH-dN1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kpu-Li-p2k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="501.60000000000002" y="377.36131934032989"/>
+        </scene>
         <!--Hot-->
         <scene sceneID="Zu4-nm-Tna">
             <objects>
@@ -21,14 +72,17 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="171"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ava-SB-Q7L" id="bem-bC-RnX">
-                                    <frame key="frameInset" width="375" height="171"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1JB-As-Qbf" userLabel="Stack Main">
+                                            <rect key="frame" x="8" y="8" width="359" height="150.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7s-Rt-qMT" userLabel="Stack Title Label">
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="97.5"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2MS-lD-wPR">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="97.5"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <attributedString key="attributedText">
                                                                 <fragment>
@@ -50,15 +104,19 @@
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="BM3-MF-QAB" userLabel="Stack Comm + Author">
+                                                    <rect key="frame" x="0.0" y="101.5" width="359" height="49"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uQg-En-PIq" userLabel="Stack Author">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="24.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="251" text="Submitted 7 hours ago by John Friendly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbN-zs-89A">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="273" height="24.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/r/sports/india" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWV-ex-fe3">
+                                                                    <rect key="frame" x="283" y="0.0" width="76" height="24.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -66,20 +124,25 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esV-77-C0O" userLabel="Stack Comments">
+                                                            <rect key="frame" x="0.0" y="24.5" width="359" height="24.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nkl-8x-QUz">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="24.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4sj-jd-Ljk">
+                                                                    <rect key="frame" x="300" y="0.0" width="59" height="24.5"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Chat" translatesAutoresizingMaskIntoConstraints="NO" id="TgP-Lg-bcd">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="24.5" height="24.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="TgP-Lg-bcd" secondAttribute="height" multiplier="1:1" id="1ej-uS-ZIg"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="537" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="sWa-oy-K5x">
+                                                                            <rect key="frame" x="34.5" y="0.0" width="24.5" height="24.5"/>
                                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -137,19 +200,23 @@
                                 <rect key="frame" x="0.0" y="227" width="375" height="171"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pns-PP-beu" id="H1E-E1-URh">
-                                    <frame key="frameInset" width="375" height="171"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="RzG-NT-peE" userLabel="Stack Main">
+                                            <rect key="frame" x="8" y="8" width="359" height="150.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ybe-EJ-tYe" userLabel="Stack Title Label">
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="97.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="1y5-nC-9xh">
+                                                            <rect key="frame" x="0.0" y="0.0" width="59" height="59"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="1y5-nC-9xh" secondAttribute="height" multiplier="1:1" id="IZf-oP-ApU"/>
                                                             </constraints>
                                                         </imageView>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sKI-ab-4rw">
+                                                            <rect key="frame" x="64" y="0.0" width="295" height="97.5"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <attributedString key="attributedText">
                                                                 <fragment>
@@ -183,15 +250,19 @@
                                                     </variation>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="tC8-BS-wMK" userLabel="Stack Comm + Author">
+                                                    <rect key="frame" x="0.0" y="101.5" width="359" height="49"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="daA-rt-sll" userLabel="Stack Author">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="24.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="251" text="Submitted 7 hours ago by John Friendly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDZ-og-A2B">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="273" height="24.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/r/sports/india" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGb-0w-IWu">
+                                                                    <rect key="frame" x="283" y="0.0" width="76" height="24.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -199,20 +270,25 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGO-wn-ZkG" userLabel="Stack Comments">
+                                                            <rect key="frame" x="0.0" y="24.5" width="359" height="24.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjj-QI-94Y">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="24.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lq5-ag-Iiz">
+                                                                    <rect key="frame" x="300" y="0.0" width="59" height="24.5"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Chat" translatesAutoresizingMaskIntoConstraints="NO" id="DEK-W1-RCN">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="24.5" height="24.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="DEK-W1-RCN" secondAttribute="height" multiplier="1:1" id="ZT8-r5-QMV"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="537" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ebb-pR-DzL">
+                                                                            <rect key="frame" x="34.5" y="0.0" width="24.5" height="24.5"/>
                                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -287,7 +363,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hLO-YA-GdE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1253" y="423"/>
+            <point key="canvasLocation" x="1337" y="377"/>
         </scene>
         <!--Story DetailVC-->
         <scene sceneID="XK9-3H-2cp">
@@ -302,7 +378,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lox-yZ-P73">
-                                <frame key="frameInset" minX="20" minY="20" width="560" height="496"/>
+                                <rect key="frame" x="20" y="20" width="560" height="496"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
@@ -335,7 +411,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L87-ke-Wj3" id="Bnm-Be-1rM">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -362,12 +438,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="mBp-i0-cDs" kind="relationship" relationship="rootViewController" id="uRb-Di-SMf"/>
+                        <segue destination="LXr-6M-gZ3" kind="relationship" relationship="rootViewController" id="GG3-h9-5an"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YrY-ny-fFJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="441" y="423"/>
+            <point key="canvasLocation" x="-274" y="379"/>
         </scene>
     </scenes>
     <resources>

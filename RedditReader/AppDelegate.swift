@@ -7,21 +7,37 @@
 //
 
 import UIKit
+import p2_OAuth2
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var oauth2 : OAuth2CodeGrant!
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        oauth2 = OAuth2CodeGrant(settings: [
+            "client_id": "G2Qqb3ZJVQJpzw",
+            "client_secret": "",
+            "authorize_uri": "https://www.reddit.com/api/v1/authorize/.compact",
+            "token_uri": "https://www.reddit.com/api/v1/access_token",
+            "scope": "identity,edit,flair,history,mysubreddits,privatemessages,read,report,save,submit,subscribe,vote,wikiedit,wikiread",      // comma-separated, not space-separated scopes!
+            "redirect_uris": ["birdland://prash"],   // register scheme in Info.plist
+            "parameters": ["duration": "permanent"],
+            ])
+        
+        //modconfig,modflair,modlog,modposts,modwiki,mysubreddits,privatemessages,read,report,save,submit,subscribe,vote,wikiedit,wikiread
         
         application.statusBarStyle = .lightContent
     
         let theStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         let theMainFeedVC = theStoryBoard.instantiateViewController(withIdentifier: "MainScreenNavController")
-        let theLeftMenuVC = theStoryBoard.instantiateViewController(withIdentifier: "menuVC")
+        //let theLeftMenuVC = theStoryBoard.instantiateViewController(withIdentifier: "menuVC")
         
         window?.rootViewController = theMainFeedVC
 
@@ -32,7 +48,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             theMainFeedVCNav.navigationBar.backgroundColor = UIColor(red: (251.0/255.0), green: (64.0/255.0), blue: (12.0/255.0), alpha: 1.0)
             //theMainFeedVCNav.navigationBar.setBackgroundImage(UIImage(named:"bg header")!, forBarMetrics: .Default)
         }
-            
+        
+        return true
+        
+    }
+    
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        print("We have a request to Open Something....  \(url)")
+        oauth2.handleRedirectURL(url)
+        
+        //        var req = oauth2.request(forURL: url)
+        //        var req = oauth2.request(forURL: URL(string: "https://www.reddit.com/hot/.json")!)
+        //        var req = oauth2.request(forURL: URL(string: "https://www.reddit.com/api/v1/me/.json")!)
         return true
     }
 

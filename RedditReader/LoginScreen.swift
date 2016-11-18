@@ -18,8 +18,17 @@ class LoginScreen: UIViewController {
     
     @IBAction func loginOAuth(_ sender: Any) {
         
+        if oauth2.isAuthorizing{
+            print("Authorization is already in progress.......")
+            return
+        }
+        
         print("Login Function Called.... \(oauth2)")
-                
+        
+        // Required to show the safari VC.. in the app.. instead of launching Safari Separately.
+        oauth2.authConfig.authorizeEmbedded = true
+        oauth2.authConfig.authorizeContext = self
+        
         oauth2.authorize() { authParameters, error in
             if let params = authParameters {
                 print("Authorized! Access token is in \(self.oauth2?.accessToken)")
@@ -34,7 +43,7 @@ class LoginScreen: UIViewController {
     
     @IBAction func logoutOAuth(_ sender: UIButton) {
        oauth2.forgetTokens()
-        oauth2.abortAuthorization()
+//        oauth2.abortAuthorization()
     }
     
     @IBAction func GoToReddit(_ sender: Any) {
@@ -45,7 +54,10 @@ class LoginScreen: UIViewController {
         //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/karma/?raw_json=1"))!)
         //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/prefs/?raw_json=1"))!)
         //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/user/me/comments/?raw_json=1"))!)
-        var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/r/funny/about"))!)
+        //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/r/funny/about"))!)
+        var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/user/username/comments"))!)
+        
+        ///user/username/comments
         
         //"/r/subreddit/about"
         

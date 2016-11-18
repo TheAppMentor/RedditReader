@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RedditReader/LoginScreen.swift"
-            timestampString = "501068748.191001"
+            timestampString = "501144118.790474"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "logoutOAuth(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RedditReader/LoginScreen.swift"
-            timestampString = "501067627.616047"
+            timestampString = "501143760.459283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "loginOAuth(_:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         print("We have a request to Open Something....  \(url)")
-        oauth2.handleRedirectURL(url)
+        RedditAuthHandler.sharedAuthHandler.handleRedirectURL(theURL: url)
         
         //        var req = oauth2.request(forURL: url)
         //        var req = oauth2.request(forURL: URL(string: "https://www.reddit.com/hot/.json")!)

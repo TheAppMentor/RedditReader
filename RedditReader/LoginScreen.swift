@@ -38,15 +38,28 @@ class LoginScreen: UIViewController {
                 print("Authorization was cancelled or went wrong: \(error)")   // error will not be nil
             }
         }
-        
     }
     
     @IBAction func logoutOAuth(_ sender: UIButton) {
        oauth2.forgetTokens()
 //        oauth2.abortAuthorization()
+        
+//        let theEnum = RedditAPIURLProvider.hot(requiresOAuth: true)
+//        let theURL = theEnum.getURL(requiresAuth: true)
+//        print("theURL is ..... \(theURL)")
     }
     
     @IBAction func GoToReddit(_ sender: Any) {
+        
+        let theEnum = RedditAPIURLProvider.hot
+        let theURL = theEnum.getURL(requiresAuth: true)
+        print("theURL is ..... \(theURL)")
+
+        RedditAuthHandler.sharedAuthHandler.authorizeContext = self
+        let theJSOND = RedditAuthHandler.sharedAuthHandler.fetchJSONForURL()
+        
+        print("The JSON Dictionary is ..... \(theJSOND)")
+        /*
         
         ///api/v1/me/trophies
         
@@ -55,11 +68,10 @@ class LoginScreen: UIViewController {
         //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/prefs/?raw_json=1"))!)
         //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/user/me/comments/?raw_json=1"))!)
         //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/r/funny/about"))!)
-        var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/user/username/comments"))!)
+        //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/user/username/comments"))!)
         
-        ///user/username/comments
-        
-        //"/r/subreddit/about"
+        var req = oauth2.request(forURL: theURL)
+
         
         req.setValue("bearer \(oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
         print("Request Value is : ........................ \(req.value(forHTTPHeaderField: "Authorization"))")
@@ -85,6 +97,7 @@ class LoginScreen: UIViewController {
         //performSegue(withIdentifier: "gotoRedditPage", sender: self)
     }
     
+ */
     
-    
+    }
 }

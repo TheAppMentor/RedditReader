@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Auth Required</key>
+	<dict/>
+	<key>No Auth</key>
+	<dict>
+		<key>listings/hot</key>
+		<string>/hot</string>
+		<key>listings/new</key>
+		<string>/new</string>
+		<key>listings/top</key>
+		<string>/top</string>
+		<key>listings/controversial</key>
+		<string>/controversial</string>
+	</dict>
+</dict>
+</plist>

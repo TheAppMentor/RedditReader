@@ -13,7 +13,7 @@ protocol AuthHandler {
     func authorizeUser() -> (accessToken : String?, error : AuthErrorCode?)
     func signOutUser() -> AuthErrorCode?
     
-    func fetchJSONForURL() -> [String:AnyObject]
+    func fetchJSONForURL(theURL : URL, completionHandler :  @escaping (_ result : [String : AnyObject]?) -> ())
     
     var authorizeContext : AnyObject? {get}
     

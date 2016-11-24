@@ -42,62 +42,31 @@ class LoginScreen: UIViewController {
     
     @IBAction func logoutOAuth(_ sender: UIButton) {
        oauth2.forgetTokens()
-//        oauth2.abortAuthorization()
-        
-//        let theEnum = RedditAPIURLProvider.hot(requiresOAuth: true)
-//        let theURL = theEnum.getURL(requiresAuth: true)
-//        print("theURL is ..... \(theURL)")
     }
     
     @IBAction func GoToReddit(_ sender: Any) {
         
-        let theEnum = RedditAPIURLProvider.hot
-        let theURL = theEnum.getURL(requiresAuth: true)
-        print("theURL is ..... \(theURL)")
-
-        RedditAuthHandler.sharedAuthHandler.authorizeContext = self
-        let theJSOND = RedditAuthHandler.sharedAuthHandler.fetchJSONForURL()
+        let theEnum = RedditAPIURLProvider.new
         
-        print("The JSON Dictionary is ..... \(theJSOND)")
-        /*
-        
-        ///api/v1/me/trophies
-        
-        //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/me/?raw_json=1"))!)
-        //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/karma/?raw_json=1"))!)
-        //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/prefs/?raw_json=1"))!)
-        //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/user/me/comments/?raw_json=1"))!)
-        //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/r/funny/about"))!)
-        //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/user/username/comments"))!)
-        
-        var req = oauth2.request(forURL: theURL)
-
-        
-        req.setValue("bearer \(oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
-        print("Request Value is : ........................ \(req.value(forHTTPHeaderField: "Authorization"))")
-        
-        let loader = OAuth2DataLoader(oauth2: oauth2)
-        
-        loader.perform(request: req) { response in
-            do {
-                let dict = try response.responseJSON()
-                DispatchQueue.main.async {
-                    // you have received `dict` JSON data!
-                    print("We Got the Final Result")
-                    print("The Details are \(dict)")
-                }
-            }
-            catch let error {
-                DispatchQueue.main.async {
-                    // an error occurred
-                    print("Error !!!!! : Unable to fetch the data ---> \(error.localizedDescription) \(error.asOAuth2Error.description)")
-                }
+        if let theURL = theEnum.getURL(requiresAuth: true){
+            print("theURL is ..... \(theURL)")
+            
+            RedditAuthHandler.sharedAuthHandler.authorizeContext = self
+            
+            RedditAuthHandler.sharedAuthHandler.fetchJSONForURL(theURL: theURL){theResponse in
+                print("The Return Dictionary is .... \(theResponse)")
+                self.theDataToPass = theResponse!
+                self.performSegue(withIdentifier: "gotoRedditPage", sender: nil)
             }
         }
-        //performSegue(withIdentifier: "gotoRedditPage", sender: self)
     }
     
- */
+    var theDataToPass = [String:AnyObject?]()
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let theFeedListVC = segue.destination as? FeedPageTableViewController{
+            theFeedListVC.storyList = RedditFetcher.sharedFetcher.jsonParser(theDataToPass)
+        }
     }
+    
 }

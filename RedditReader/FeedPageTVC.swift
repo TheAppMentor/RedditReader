@@ -8,14 +8,10 @@
 
 import UIKit
 
-
-
-
 class FeedPageTableViewController: UITableViewController {
     
     var storyList = [FeedStory]()
     var selectedStoryURL : URL?
-    
     let theRequest = URL(string: "https://www.reddit.com/hot/.json")
     
     @IBAction func openLeftMenu(_ sender: UIBarButtonItem) {
@@ -26,15 +22,26 @@ class FeedPageTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         // Set Navigation Bar Title Properties.
-
-        
         refreshControl = UIRefreshControl()
         tableView.addSubview(refreshControl!)
         refreshControl?.backgroundColor = UIColor.cyan
         refreshControl!.addTarget(self, action: #selector(FeedPageTableViewController.refreshTableView), for: .valueChanged)
         
         NotificationCenter.default.addObserver(self, selector: #selector(FeedPageTableViewController.updateUI(_:)), name: NSNotification.Name(rawValue: "NewFeedAvailable"), object: nil)
-        RedditFetcher.sharedFetcher.fetchJSONFromReddit(theRequest!)
+        
+        //RedditFetcher.sharedFetcher.fetchJSONFromReddit(theRequest!)
+        
+//        let theEnum = RedditAPIURLProvider.hot
+//        //if let theURL = theEnum.getURL(requiresAuth: true){
+//            //print("theURL is ..... \(theURL)")
+//            
+////            RedditAuthHandler.sharedAuthHandler.authorizeContext = self
+//            
+//            RedditAuthHandler.sharedAuthHandler.fetchJSONForURL(theURL: theURL){theResponse in
+//                print("The Return Dictionary is .... \(theResponse)")
+//                self.storyList = RedditFetcher.sharedFetcher.jsonParser(theResponse!)
+//            }
+        //}
     }
     
     func refreshTableView() {
@@ -55,6 +62,10 @@ class FeedPageTableViewController: UITableViewController {
         }
     }
     
+    // *************************************************************************** //
+    // ***********************    Table View Controller    *********************** //
+    // *************************************************************************** //
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -62,7 +73,6 @@ class FeedPageTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return storyList.count
     }
-    
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var theCell = tableView.dequeueReusableCell(withIdentifier: "textonlycell")!

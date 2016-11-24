@@ -30,50 +30,74 @@ class RedditAuthHandler : AuthHandler {
         oauth2.handleRedirectURL(theURL)
     }
     
-    func fetchJSONForURL() -> [String:AnyObject]{
+    
+    func fetchJSONForURL(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ()){
         
         var returnDict = [String:AnyObject]()
         
-        
-        if oauth2.hasUnexpiredAccessToken() == false{
-            self.authorizeUserPrivate()
-        }
-        
-        if oauth2.hasUnexpiredAccessToken(){
-            ///api/v1/me/trophies
-            
-            //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/me/?raw_json=1"))!)
-            //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/karma/?raw_json=1"))!)
-            //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/prefs/?raw_json=1"))!)
-            //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/user/me/comments/?raw_json=1"))!)
-            //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/r/funny/about"))!)
-            var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/user/username/comments"))!)
-            
-            req.setValue("bearer \(oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
-            print("Request Value is : ........................ \(req.value(forHTTPHeaderField: "Authorization"))")
-            
-            let loader = OAuth2DataLoader(oauth2: oauth2)
-            
-            loader.perform(request: req) { response in
-                do {
-                    let dict = try response.responseJSON()
-                    DispatchQueue.main.async {
-                        // you have received `dict` JSON data!
-                        print("We Got the Final Result")
-                        print("The Details are \(dict)")
-                        returnDict = dict as [String:AnyObject]
+            self.authorizeUserPrivate(completionHandler: {
+                var req = self.oauth2.request(forURL: theURL)
+                
+                req.setValue("bearer \(self.oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
+                print("Request Value is : ........................ \(req.value(forHTTPHeaderField: "Authorization"))")
+                
+                let loader = OAuth2DataLoader(oauth2: self.oauth2)
+                
+                loader.perform(request: req) { response in
+                    do {
+                        let dict = try response.responseJSON()
+                        DispatchQueue.main.async {
+                            // you have received `dict` JSON data!
+                            print("We Got the Final Result")
+                            returnDict = dict as [String:AnyObject]
+                            completionHandler(returnDict)
+                        }
+                    }
+                    catch let error {
+                        DispatchQueue.main.async {
+                            // an error occurred
+                            print("Error !!!!! : Unable to fetch the data ---> \(error.localizedDescription) \(error.asOAuth2Error.description)")
+                        }
                     }
                 }
-                catch let error {
-                    DispatchQueue.main.async {
-                        // an error occurred
-                        print("Error !!!!! : Unable to fetch the data ---> \(error.localizedDescription) \(error.asOAuth2Error.description)")
-                    }
-                }
-            }
-        }
+            })
+            
+//            if self.authorizeUserPrivate(completionHandler).error == nil{
+//                //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/me/?raw_json=1"))!)
+//                //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/karma/?raw_json=1"))!)
+//                //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/prefs/?raw_json=1"))!)
+//                //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/user/me/comments/?raw_json=1"))!)
+//                //var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/r/funny/about"))!)
+//                var req = oauth2.request(forURL: theURL)
+//                
+//                req.setValue("bearer \(oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
+//                print("Request Value is : ........................ \(req.value(forHTTPHeaderField: "Authorization"))")
+//                
+//                let loader = OAuth2DataLoader(oauth2: oauth2)
+//                
+//                loader.perform(request: req) { response in
+//                    do {
+//                        let dict = try response.responseJSON()
+//                        DispatchQueue.main.async {
+//                            // you have received `dict` JSON data!
+//                            print("We Got the Final Result")
+//                            returnDict = dict as [String:AnyObject]
+//                            completionHandler(returnDict)
+//                        }
+//                    }
+//                    catch let error {
+//                        DispatchQueue.main.async {
+//                            // an error occurred
+//                            print("Error !!!!! : Unable to fetch the data ---> \(error.localizedDescription) \(error.asOAuth2Error.description)")
+//                        }
+//                    }
+//                }
+//            }
         
-        return returnDict
+            
+        
+    
+    
     }
     
     
@@ -118,30 +142,35 @@ class RedditAuthHandler : AuthHandler {
     
     private init() {}
     
-    private func authorizeUserPrivate() -> (accessToken : String?, error : AuthErrorCode?){
-        
-        var authCode : String?
-        var theError : AuthErrorCode?
+    private func authorizeUserPrivate(completionHandler : @escaping () -> ()){
         
         if oauth2.isAuthorizing{
             print("Authorization is already in progress.......")
-            theError = AuthErrorCode.authorizationAlreadyInProgress
-            return(authCode,theError)
+            return
         }
         
-        // Required to show the safari VC.. in the app.. instead of launching Safari Separately.
-        oauth2.authConfig.authorizeEmbedded = true
-        oauth2.authConfig.authorizeContext = authorizeContext
-        
-        oauth2.authorize() { authParameters, error in
-            if let _ = authParameters {
-                print("Authorized! Access token is in \(self.oauth2.accessToken)")
-                authCode = self.oauth2.accessToken
-            }
-            else {
-                print("Authorization was cancelled or went wrong: \(error)")   // error will not be nil
+        if oauth2.hasUnexpiredAccessToken() {completionHandler()} else{
+            // Required to show the safari VC.. in the app.. instead of launching Safari Separately.
+            oauth2.authConfig.authorizeEmbedded = true
+            oauth2.authConfig.authorizeContext = authorizeContext
+            
+            oauth2.authorize() { authParameters, error in
+                if let _ = authParameters {
+                    print("Authorized! Access token is in \(self.oauth2.accessToken)")
+                    completionHandler()
+                }
+                else {
+                    print("Authorization was cancelled or went wrong: \(error)")   // error will not be nil
+                }
             }
         }
-        return(authCode,theError)
     }
 }
+
+
+
+//var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/me/?raw_json=1"))!)
+//var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/karma/?raw_json=1"))!)
+//var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/v1/me/prefs/?raw_json=1"))!)
+//var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/api/user/me/comments/?raw_json=1"))!)
+//var req = oauth2.request(forURL: URL(string: ("https://oauth.reddit.com/r/funny/about"))!)

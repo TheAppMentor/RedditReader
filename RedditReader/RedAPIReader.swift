@@ -14,9 +14,10 @@ enum RedditAPIURLProvider : String{
     case random = "listings/random"
     case top = "listings/top"
     case controversial = "listings/controversial"
+    case new = "listings/new"
     
     private var baseURLString : String {
-     return "https://www.reddit.com"
+     return "https://oauth.reddit.com"
     }
     
     private var filePath : String{
@@ -39,7 +40,7 @@ enum RedditAPIURLProvider : String{
                     
                     print ("Try with Self : \(theNoAuthD[self.rawValue])")
 
-                    return URL(string:(baseURLString + (theNoAuthD["listings/hot"] as! String)))
+                    return URL(string:(baseURLString + (theNoAuthD[self.rawValue] as! String)))
                 }
             }
         }

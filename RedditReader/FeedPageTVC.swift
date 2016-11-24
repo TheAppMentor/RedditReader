@@ -31,7 +31,7 @@ class FeedPageTableViewController: UITableViewController {
         
         //RedditFetcher.sharedFetcher.fetchJSONFromReddit(theRequest!)
         
-//        let theEnum = RedditAPIURLProvider.hot
+//        let theEnum = RedditAPIHandler.hot
 //        //if let theURL = theEnum.getURL(requiresAuth: true){
 //            //print("theURL is ..... \(theURL)")
 //            

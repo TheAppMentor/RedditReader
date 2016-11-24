@@ -46,9 +46,11 @@ class LoginScreen: UIViewController {
     
     @IBAction func GoToReddit(_ sender: Any) {
         
-        let theEnum = RedditAPIURLProvider.new
+//        let theEnum = RedditAPIHandler.read_new
+        let theEnum = RedditAPIHandler.history_user_username_comments
+
         
-        if let theURL = theEnum.getURL(requiresAuth: true){
+        if let theURL = theEnum.getURL(){
             print("theURL is ..... \(theURL)")
             
             RedditAuthHandler.sharedAuthHandler.authorizeContext = self

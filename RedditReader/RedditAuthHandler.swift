@@ -18,7 +18,7 @@ class RedditAuthHandler : AuthHandler {
     public func authorizeUser() -> (accessToken : String?, error : AuthErrorCode?){
         
         
-    return (nil,nil)
+        return (nil,nil)
     }
     
     func signOutUser() -> AuthErrorCode?{
@@ -31,9 +31,40 @@ class RedditAuthHandler : AuthHandler {
     }
     
     
-    private func fetchUseInformation() -> [String:AnyObject?]{
-        var returnDict = [String:AnyObject]()
+    func authorizeUser(completionHanlder : @escaping (_ accessToken : String?, _ userInfo : [String:AnyObject?], _ error : AuthErrorCode?) -> ()){
+        
+        
+        self.authorizeUserPrivate(completionHandler: {
+            
+            // Fetch User Information :
+            self.fetchUseInformation(completionHanlder: { (theUserInfoDict) in
+                print("I have authorized the user.")
+                print("user information is \(theUserInfoDict)")
+            })
+        })
+    }
 
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    private func fetchUseInformation(completionHanlder : @escaping (_ userInfoObject : [String:AnyObject?]) -> ()){
+        var userInfoDict = [String:AnyObject]()
+        
         // Fetch User Information :
         
         //https://oauth.reddit.com/api/me/?raw_json=1
@@ -49,8 +80,9 @@ class RedditAuthHandler : AuthHandler {
                 DispatchQueue.main.async {
                     // you have received `dict` JSON data!
                     print("We Got the User Information")
-                    returnDict = dict as [String:AnyObject]
-                    print("The User Name is \(returnDict["name"])")
+                    userInfoDict = dict as [String:AnyObject]
+                    print("The User Name is \(userInfoDict["name"])")
+                    completionHanlder(userInfoDict)
                 }
             }
             catch let error {
@@ -60,20 +92,18 @@ class RedditAuthHandler : AuthHandler {
                 }
             }
         }
-
-        return returnDict
     }
     
-    func fetchJSONForURL(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ()){
+    func fetchJSONForURLWithUserAuth(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ()){
         
         var returnDict = [String:AnyObject]()
         
-            self.authorizeUserPrivate(completionHandler: {
-                
-                // Fetch User Information :
-                
-                let userInfo = self.fetchUseInformation()
-                
+        self.authorizeUserPrivate(completionHandler: {
+            
+            // Fetch User Information :
+            
+            self.fetchUseInformation(completionHanlder: {_ in
+                print("User Fetch is complete")
                 var req = self.oauth2.request(forURL: theURL)
                 
                 req.setValue("bearer \(self.oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
@@ -99,11 +129,48 @@ class RedditAuthHandler : AuthHandler {
                     }
                 }
             })
+        })
     }
     
-    
-    
-    
+
+    func fetchJSONForURLNoUserAuthRequired(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ()){
+        
+        var returnDict = [String:AnyObject]()
+        
+        self.authorizeUserPrivate(completionHandler: {
+            
+            // Fetch User Information :
+            
+            self.fetchUseInformation(completionHanlder: {_ in
+                print("User Fetch is complete")
+                var req = self.oauth2.request(forURL: theURL)
+                
+                req.setValue("bearer \(self.oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
+                print("Request Value is : ........................ \(req.value(forHTTPHeaderField: "Authorization"))")
+                
+                let loader = OAuth2DataLoader(oauth2: self.oauth2)
+                
+                loader.perform(request: req) { response in
+                    do {
+                        let dict = try response.responseJSON()
+                        DispatchQueue.main.async {
+                            // you have received `dict` JSON data!
+                            print("We Got the Final Result")
+                            returnDict = dict as [String:AnyObject]
+                            completionHandler(returnDict)
+                        }
+                    }
+                    catch let error {
+                        DispatchQueue.main.async {
+                            // an error occurred
+                            print("Error !!!!! : Unable to fetch the data ---> \(error.localizedDescription) \(error.asOAuth2Error.description)")
+                        }
+                    }
+                }
+            })
+        })
+    }
+
     
     
     
@@ -118,6 +185,17 @@ class RedditAuthHandler : AuthHandler {
     
     
     // Private functions/Properties.
+    
+//    var authorizedUserDetails : [String:AnyObject?]?{
+//        if authorizedUserDetailsStore != nil{
+//            return authorizedUserDetailsStore
+//        }
+//        
+//        authorizedUserDetailsStore = fetchUseInformation()
+//        
+//    }
+//    
+//    private var authorizedUserDetailsStore : [String : AnyObject?]?
     
     private let redditAppID = "G2Qqb3ZJVQJpzw"
     
@@ -171,6 +249,7 @@ class RedditAuthHandler : AuthHandler {
             }
         }
     }
+
 }
 
 

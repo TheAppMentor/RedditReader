@@ -49,17 +49,12 @@ class LoginScreen: UIViewController {
 //        let theEnum = RedditAPIHandler.read_new
         let theEnum = RedditAPIHandler.history_user_username_comments
 
+        RedditAuthHandler.sharedAuthHandler.authorizeContext = self
         
-        if let theURL = theEnum.getURL(){
-            print("theURL is ..... \(theURL)")
-            
-            RedditAuthHandler.sharedAuthHandler.authorizeContext = self
-            
-            RedditAuthHandler.sharedAuthHandler.fetchJSONForURL(theURL: theURL){theResponse in
-                print("The Return Dictionary is .... \(theResponse)")
-                self.theDataToPass = theResponse!
-                self.performSegue(withIdentifier: "gotoRedditPage", sender: nil)
-            }
+        theEnum.fetchData(sender: self) {(theResponse) in
+            print("Login Screen : We have now fetched the data .................. ")
+            self.theDataToPass = theResponse
+            self.performSegue(withIdentifier: "gotoRedditPage", sender: nil)
         }
     }
     

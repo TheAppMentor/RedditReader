@@ -10,7 +10,7 @@ import Foundation
 
 
 enum RedditAPIHandler : String{
-
+    
     case none_api_comment
     case none_api_friend
     case none_api_needs_captcha
@@ -47,14 +47,12 @@ enum RedditAPIHandler : String{
     case livemanage_api_live_thread_rm_contributor
     case livemanage_api_live_thread_rm_contributor_invite
     case livemanage_api_live_thread_set_contributor_permissions
-    case mysubredditsmysubreddits
     case mysubreddits_api_v1_me_friends_username
     case mysubreddits_api_v1_me_karma
     case mysubreddits_subreddits_mine_contributor
     case mysubreddits_subreddits_mine_moderator
     case mysubreddits_subreddits_mine_subscriber
     case mysubreddits_subreddits_mine_where
-    case mysubredditsprivatemessages
     case mysubreddits_api_block
     case mysubreddits_api_compose
     case mysubreddits_api_del_msg
@@ -132,7 +130,6 @@ enum RedditAPIHandler : String{
     case save_api_saved_categories
     case save_api_store_visits
     case save_api_unsave
-    case submitsubmit
     case submit_api_live_create
     case submit_api_live_thread_update
     case submit_api_submit
@@ -146,9 +143,7 @@ enum RedditAPIHandler : String{
     case subscribe_api_subscribe
     case subscribe_api_v1_me_friends_username
     case vote_api_vote
-    case votewikiedit
     case vote_api_wiki_edit
-    case wikireadwikiread
     case wikiread_wiki_discussions_page
     case wikiread_wiki_pages
     case wikiread_wiki_revisions
@@ -161,82 +156,40 @@ enum RedditAPIHandler : String{
         if let validURL = self.getURL(){
             print("We have a valid URL........... \(validURL)")
             
-                        // Only if user api requires OAuth, request for credentials. (Remeber most users might be Anonymous)
-                        if isAuthRequired == true{
-                            print("This Feed requires OAuth")
-                            // Request for Authorization before fetching.
-                            // Step 1 : Fetch User information (name, etc)
-                            print("This Feed requires user name")
-                            
-                            RedditAuthHandler.sharedAuthHandler.fetchJSONForURLWithUserAuth(theURL: validURL, completionHandler: { (theJSONResponse) in
-                                print("We have a response with Authentication")
-                                if let validJSONResponse = theJSONResponse{
-                                    completionHandler(theJSONResponse!)
-                                } else{
-                                    completionHandler([String:AnyObject?]())
-                                }
-                            })
-                        } else {
-                            // No Auth Required, Go Fetch.
-                            print("This Feed DOES NOT NEED.... OAuth")
-                            RedditAuthHandler.sharedAuthHandler.fetchJSONForURLNoUserAuthRequired(theURL: validURL, completionHandler: { (theJSONResponse) in
-                                print("We have a response with No Authentication")
-                                completionHandler([String:AnyObject]())
-                            })
-                        }
-
-
+            // Only if user api requires OAuth, request for credentials. (Remeber most users might be Anonymous)
+            if isAuthRequired == true{
+                print("This Feed requires OAuth")
+                // Request for Authorization before fetching.
+                // Step 1 : Fetch User information (name, etc)
+                
+                RedditAuthHandler.sharedAuthHandler.fetchJSONForURLWithUserAuth(theURL: validURL, requiresUserName: isUserNameRequired, completionHandler: { (theJSONResponse,theUserInfo) in
+                    print("We have a response with Authentication")
+                    if let validJSONResponse = theJSONResponse{
+                        completionHandler(validJSONResponse)
+                    } else{
+                        completionHandler([String:AnyObject?]())
+                    }
+                })
+            } else {
+                // No Auth Required, Go Fetch.
+                print("This Feed DOES NOT NEED.... OAuth")
+                RedditAuthHandler.sharedAuthHandler.fetchJSONForURLNoUserAuthRequired(theURL: validURL, completionHandler: { (theJSONResponse) in
+                    print("We have a response with No Authentication")
+                    completionHandler([String:AnyObject]())
+                })
+            }
         }
     }
     
-    
-    private func fetchUserName(theUserInfoObj : [String : AnyObject?]) -> (){
+    private func getURL() -> URL? {
         
-    
+        if let theApiURL = feedProperties?["apiURL"] as? String{
+            return URL(string:(baseURLString + theApiURL))
+        }
+        print("Could not find the URL : Returning Nil")
+        return nil
     }
     
-//    
-//    func fetchJSONForURL(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ()){
-//        
-//        var returnDict = [String:AnyObject]()
-//        
-//        self.authorizeUserPrivate(completionHandler: {
-//            
-//            // Fetch User Information :
-//            
-//            self.fetchUseInformation(completionHanlder: {
-//                print("User Fetch is complete")
-//                var req = self.oauth2.request(forURL: theURL)
-//                
-//                req.setValue("bearer \(self.oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
-//                print("Request Value is : ........................ \(req.value(forHTTPHeaderField: "Authorization"))")
-//                
-//                let loader = OAuth2DataLoader(oauth2: self.oauth2)
-//                
-//                loader.perform(request: req) { response in
-//                    do {
-//                        let dict = try response.responseJSON()
-//                        DispatchQueue.main.async {
-//                            // you have received `dict` JSON data!
-//                            print("We Got the Final Result")
-//                            returnDict = dict as [String:AnyObject]
-//                            completionHandler(returnDict)
-//                        }
-//                    }
-//                    catch let error {
-//                        DispatchQueue.main.async {
-//                            // an error occurred
-//                            print("Error !!!!! : Unable to fetch the data ---> \(error.localizedDescription) \(error.asOAuth2Error.description)")
-//                        }
-//                    }
-//                }
-//            })
-//        })
-//    }
-//
-    
-    
-
     private var apiMappingDict : [String : AnyObject?]? {
         if let theFileURL = apiMappingFileURL{
             if let apiMapDict = NSDictionary(contentsOf: theFileURL) as? [String:AnyObject]{
@@ -247,7 +200,7 @@ enum RedditAPIHandler : String{
     }
     
     private var baseURLString : String {
-     return "https://oauth.reddit.com/"
+        return "https://oauth.reddit.com/"
     }
     
     private var filePath : String{
@@ -278,16 +231,5 @@ enum RedditAPIHandler : String{
             return needsUserName
         }
         return false
-        
-    }
-    
-    private func getURL() -> URL? {
-        
-        if let theApiURL = feedProperties?["apiURL"] as? String{
-            return URL(string:(baseURLString + theApiURL))
-        }
-        
-        print("Could not find the URL : Returning Nil")
-        return nil
     }
 }

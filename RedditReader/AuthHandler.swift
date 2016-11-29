@@ -15,9 +15,12 @@ protocol AuthHandler {
 
     func signOutUser() -> AuthErrorCode?
     
-//    //func fetchJSONForURL(theURL : URL, completionHandler :  @escaping (_ result : [String : AnyObject]?) -> ())
-//    func fetchJSONForURLWithUserAuth(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ())
-//    func fetchJSONForURLNoUserAuthRequired(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ())
+    //func fetchJSONForURL(theURL : URL, completionHandler :  @escaping (_ result : [String : AnyObject]?) -> ())
+    //func fetchJSONForURLWithUserAuth(theURL : URL, requiresUserName : Bool, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ())
+    func fetchJSONForURLWithUserAuth(theURL : URL, requiresUserName : Bool, completionHandler : @escaping (_ result : [String : AnyObject]?, _ userInfo : UserInfo) -> ())
+
+
+    func fetchJSONForURLNoUserAuthRequired(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ())
     
     // Which screen/Object will present the authorization screen. Normallly it will be the screen that requires the user to authenticate.
     var authorizeContext : AnyObject? {get}

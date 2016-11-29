@@ -10,6 +10,9 @@ import Foundation
 import p2_OAuth2
 
 class RedditAuthHandler : AuthHandler {
+
+
+
     
     static let sharedAuthHandler : RedditAuthHandler = RedditAuthHandler()
     
@@ -40,7 +43,8 @@ class RedditAuthHandler : AuthHandler {
                 print("I have authorized the user.")
                 print("user information is \(theUserInfoDict)")
                 
-                completionHanlder("Access Toekn.... ", theUserInfoDict, nil)
+                
+                completionHanlder("Access Toekn.... ", [String:AnyObject?](), nil)
             })
         })
     }
@@ -63,8 +67,8 @@ class RedditAuthHandler : AuthHandler {
     
     
     
-    private func fetchUseInformation(completionHanlder : @escaping (_ userInfoObject : [String:AnyObject?]) -> ()){
-        var userInfoDict = [String:AnyObject]()
+    private func fetchUseInformation(completionHanlder : @escaping (_ userInfoObject : UserInfo) -> ()){
+        //var userInfoDict = [String:AnyObject]()
         
         // Fetch User Information :
         
@@ -81,8 +85,8 @@ class RedditAuthHandler : AuthHandler {
                 DispatchQueue.main.async {
                     // you have received `dict` JSON data!
                     print("We Got the User Information")
-                    userInfoDict = dict as [String:AnyObject]
-                    print("The User Name is \(userInfoDict["name"])")
+                    let userInfoDict = UserInfo(userInfoDict: dict as [String : AnyObject?])
+                    print("The User Name is \(userInfoDict.name)")
                     completionHanlder(userInfoDict)
                 }
             }
@@ -95,17 +99,27 @@ class RedditAuthHandler : AuthHandler {
         }
     }
     
-    func fetchJSONForURLWithUserAuth(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ()){
-        
+    func fetchJSONForURLWithUserAuth(theURL : URL, requiresUserName : Bool, completionHandler : @escaping (_ result : [String : AnyObject]?, _ userInfo : UserInfo) -> ()){
+
         var returnDict = [String:AnyObject]()
         
         self.authorizeUserPrivate(completionHandler: {
-            
-            // Fetch User Information :
-            
-            self.fetchUseInformation(completionHanlder: {_ in
+            self.fetchUseInformation(completionHanlder: {(userInfoFetched) in
                 print("User Fetch is complete")
-                var req = self.oauth2.request(forURL: theURL)
+                
+                var requestURL = theURL
+                
+                if requiresUserName == true{
+                    print("This fello requires User name Substitution.... ")
+                    print("Old URL is : \(theURL)")
+
+                    let theURLWithUsername = String(describing: theURL)
+                   requestURL = URL(string: theURLWithUsername.replacingOccurrences(of: "username", with: userInfoFetched.name!))!
+                    print("New URL is : \(requestURL)")
+
+                }
+                
+                var req = self.oauth2.request(forURL: requestURL)
                 
                 req.setValue("bearer \(self.oauth2.accessToken!)", forHTTPHeaderField: "Authorization")
                 print("Request Value is : ........................ \(req.value(forHTTPHeaderField: "Authorization"))")
@@ -117,9 +131,9 @@ class RedditAuthHandler : AuthHandler {
                         let dict = try response.responseJSON()
                         DispatchQueue.main.async {
                             // you have received `dict` JSON data!
-                            print("We Got the Final Result")
+                            print("We Got the Feed Information ")
                             returnDict = dict as [String:AnyObject]
-                            completionHandler(returnDict)
+                            completionHandler(returnDict, userInfoFetched)
                         }
                     }
                     catch let error {

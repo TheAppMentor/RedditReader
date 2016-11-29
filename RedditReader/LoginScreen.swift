@@ -47,7 +47,8 @@ class LoginScreen: UIViewController {
     @IBAction func GoToReddit(_ sender: Any) {
         
 //        let theEnum = RedditAPIHandler.read_new
-        let theEnum = RedditAPIHandler.history_user_username_comments
+//        let theEnum = RedditAPIHandler.history_user_username_comments
+            let theEnum = RedditAPIHandler.mysubreddits_api_v1_me_friends_username
 
         RedditAuthHandler.sharedAuthHandler.authorizeContext = self
         

@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RedditReader/LoginScreen.swift"
-            timestampString = "502098756.401031"
+            timestampString = "502110822.73203"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "GoToReddit(_:)"
             landmarkType = "7">
          </BreakpointContent>

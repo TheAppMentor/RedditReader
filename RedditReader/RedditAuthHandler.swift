@@ -31,8 +31,7 @@ class RedditAuthHandler : AuthHandler {
     }
     
     
-    func authorizeUser(completionHanlder : @escaping (_ accessToken : String?, _ userInfo : [String:AnyObject?], _ error : AuthErrorCode?) -> ()){
-        
+    func authorizeUser(completionHanlder : @escaping (_ accessToken : String?, _ userInfo : [String:AnyObject?], _ error : AuthErrorCode?) -> ()){        
         
         self.authorizeUserPrivate(completionHandler: {
             
@@ -40,6 +39,8 @@ class RedditAuthHandler : AuthHandler {
             self.fetchUseInformation(completionHanlder: { (theUserInfoDict) in
                 print("I have authorized the user.")
                 print("user information is \(theUserInfoDict)")
+                
+                completionHanlder("Access Toekn.... ", theUserInfoDict, nil)
             })
         })
     }

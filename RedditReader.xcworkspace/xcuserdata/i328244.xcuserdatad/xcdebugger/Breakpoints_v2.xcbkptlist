@@ -48,16 +48,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditReader/LoginScreen.swift"
+            timestampString = "502098756.401031"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "GoToReddit(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RedditReader/RedAPIReader.swift"
-            timestampString = "502095377.953978"
+            filePath = "RedditReader/UserInfo.swift"
+            timestampString = "502101454.837183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "fetchData(sender:completionHandler:)"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "init(userInfoDict:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

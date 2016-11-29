@@ -10,11 +10,6 @@ import Foundation
 
 
 enum RedditAPIHandler : String{
-//    case hot = "listings/hot"
-//    case random = "listings/random"
-//    case top = "listings/top"
-//    case controversial = "listings/controversial"
-//    case new = "listings/new"
 
     case none_api_comment
     case none_api_friend
@@ -173,18 +168,13 @@ enum RedditAPIHandler : String{
                             // Step 1 : Fetch User information (name, etc)
                             print("This Feed requires user name")
                             
-                            
-                            RedditAuthHandler.sharedAuthHandler.authorizeUser{(theAccessToken, theUserInfo, theError) in
-                                
-                                print("The Access Token is .... \(theAccessToken)")
-                                print("The User info is .... \(theUserInfo)")
-                                print("The Error is .... \(theError)")
-                            }
-
-                            
                             RedditAuthHandler.sharedAuthHandler.fetchJSONForURLWithUserAuth(theURL: validURL, completionHandler: { (theJSONResponse) in
                                 print("We have a response with Authentication")
-                                completionHandler([String:AnyObject]())
+                                if let validJSONResponse = theJSONResponse{
+                                    completionHandler(theJSONResponse!)
+                                } else{
+                                    completionHandler([String:AnyObject?]())
+                                }
                             })
                         } else {
                             // No Auth Required, Go Fetch.
@@ -195,14 +185,14 @@ enum RedditAPIHandler : String{
                             })
                         }
 
-        
-            
-//            RedditAuthHandler.sharedAuthHandler.fetchJSONForURL(theURL: validURL, completionHandler: { (theResponse) in
-//                print("The Response is .... \(theResponse)")
-//                completionHandler(theResponse!)
-//            })
-            
+
         }
+    }
+    
+    
+    private func fetchUserName(theUserInfoObj : [String : AnyObject?]) -> (){
+        
+    
     }
     
 //    

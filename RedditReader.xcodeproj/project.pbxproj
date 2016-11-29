@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F1AAFE31DED6F7E0000AEEC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1AAFE21DED6F7E0000AEEC /* UserInfo.swift */; };
 		2F5AED1D1D4129B90092243F /* TheNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AED1C1D4129B90092243F /* TheNavController.swift */; };
 		2F5AED1F1D4131180092243F /* StoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5AED1E1D4131180092243F /* StoryDetailVC.swift */; };
 		2F7741531DDEDCD700F19E02 /* RedditApiLookup.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F7741521DDEDCD700F19E02 /* RedditApiLookup.plist */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F1AAFE21DED6F7E0000AEEC /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2F5AED1C1D4129B90092243F /* TheNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TheNavController.swift; path = ../TheNavController.swift; sourceTree = "<group>"; };
 		2F5AED1E1D4131180092243F /* StoryDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryDetailVC.swift; sourceTree = "<group>"; };
 		2F7741521DDEDCD700F19E02 /* RedditApiLookup.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RedditApiLookup.plist; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				2FCF54ED1D3FE3240063C180 /* RedditFetcher.swift */,
 				2FCF54EF1D3FE33C0063C180 /* FeedStory.swift */,
+				2F1AAFE21DED6F7E0000AEEC /* UserInfo.swift */,
 			);
 			name = "Model/Utility Classes";
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				2F7741551DDEEF6C00F19E02 /* RedAPIReader.swift in Sources */,
 				2FCF54F21D3FE34E0063C180 /* FeedType.swift in Sources */,
 				2F8F19741D42995D00929215 /* LeftSlideMenuTVC.swift in Sources */,
+				2F1AAFE31DED6F7E0000AEEC /* UserInfo.swift in Sources */,
 				2F8ED8351DDD88930087A77B /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

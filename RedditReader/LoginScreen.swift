@@ -53,6 +53,8 @@ class LoginScreen: UIViewController {
         
         theEnum.fetchData(sender: self) {(theResponse) in
             print("Login Screen : We have now fetched the data .................. ")
+            print("Login Screen : The Respone is \(theResponse)")
+            
             self.theDataToPass = theResponse
             self.performSegue(withIdentifier: "gotoRedditPage", sender: nil)
         }

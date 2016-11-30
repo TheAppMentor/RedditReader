@@ -56,5 +56,4 @@ struct UserInfo {
         is_mod  = userInfoDict["is_mod"] as? Bool ?? nil
         comment_karma  = userInfoDict["comment_karma"] as? Int ?? nil
     }
-
 }

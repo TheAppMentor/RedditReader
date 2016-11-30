@@ -79,7 +79,6 @@ class RedditFetcher {
                         if let theStoryURL = theChildData["url"] as? String{
                             theFeedStory.storyURL = URL(string: theStoryURL)
                         }
-    
                     }
                     theStoryList.append(theFeedStory)
                 }

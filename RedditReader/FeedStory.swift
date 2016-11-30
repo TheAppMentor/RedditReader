@@ -22,6 +22,13 @@ class FeedStory : CustomStringConvertible{
     var comments : Int
     var subreddit : String
     var storyURL : URL?
+
+//    var preViewImage : UIImage? = #imageLiteral(resourceName: "placeholder"){
+//        didSet{
+//            print("We have a preview Image now.. Refresh the View")
+//        }
+//    }
+
     
     var previewImageURL : URL? {
         didSet {
@@ -36,6 +43,7 @@ class FeedStory : CustomStringConvertible{
     var preViewImage : UIImage? = #imageLiteral(resourceName: "placeholder"){
         didSet{
             print("We have a preview Image now.. Refresh the View")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshImage"), object: nil)
         }
     }
     

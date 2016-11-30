@@ -46,7 +46,7 @@ class LoginScreen: UIViewController {
     
     @IBAction func GoToReddit(_ sender: Any) {
         
-        let theEnum = RedditAPIHandler.read_new
+        let theEnum = RedditAPIHandler.read_hot(after: "someAfter", before: "someBefore", count: 100, limit: 2, show: nil, sr_detail: false)
         //let theEnum = RedditAPIHandler.history_user_username_comments
         //let theEnum = RedditAPIHandler.mysubreddits_api_v1_me_friends_username
 
@@ -65,7 +65,7 @@ class LoginScreen: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let theFeedListVC = segue.destination as? FeedPageTableViewController{
-            theFeedListVC.storyList = FeedStoryList(storyFeedDict: self.theDataToPass).allStories()!
+            theFeedListVC.storyList = FeedStoryList(storyFeedDict: self.theDataToPass).allStories()
 
         }
     }

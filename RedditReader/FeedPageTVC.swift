@@ -82,7 +82,10 @@ class FeedPageTableViewController: UITableViewController {
         if let theThumbnailImageURL =  storyList[(indexPath as NSIndexPath).row].previewImageURL {
             theCell = tableView.dequeueReusableCell(withIdentifier: "previewImageCell")!
             // Populate the Image
-            if let thePreviewImageView = theCell.viewWithTag(99) as? UIImageView{
+            if let thePreviewImageView = theCell.viewWithTag(99) as? NotificationObservingImageView{
+                
+                //thePreviewImageView.imageURL = storyList[(indexPath as NSIndexPath).row].previewImageURL
+                
                 thePreviewImageView.image = storyList[(indexPath as NSIndexPath).row].preViewImage
                                 
 //                thePreviewImage.image = UIImage(named: "placeholder")

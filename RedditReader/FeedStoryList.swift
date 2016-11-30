@@ -10,16 +10,22 @@ import Foundation
 
 struct FeedStoryList {
     
-    func allStories() -> [FeedStory]? {
+    
+    func  fetchStories(feedType : RedditAPIHandler, completionHandler : () -> ()){
+
+        
+    }
+    
+    func allStories() -> [FeedStory] {
         return stories
     }
     
     func  firstStory() -> FeedStory? {
-        return stories?.first
+        return stories.first
     }
     
     func  lastStory() -> FeedStory? {
-        return stories?.last
+        return stories.last
     }
     
     func fetchNextStoryList(completionHandler : () -> ()){
@@ -30,7 +36,38 @@ struct FeedStoryList {
         completionHandler()
     }
     
-    private var stories : [FeedStory]?
+    
+    
+    private var isFirstFetch : Bool{
+        if allStories().count > 0 {
+            return false
+        }
+        return true
+    }
+    
+    private var fetchLimit : Int{
+        if isFirstFetch{
+            return 5
+        }
+        return 25
+    }
+    
+    private var limitParamterForURL : String{
+        return "/limit=\(fetchLimit)"
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    private var stories = [FeedStory]()
     
     init(storyFeedDict : [String:AnyObject?]) {
         stories = jsonParser(storyFeedDict)

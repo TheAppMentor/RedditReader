@@ -18,7 +18,13 @@ class SelfRefreshingImageView: UIImageView {
     }
     */
     
-    var imageURL : URL?
+    var imageURL : URL?{
+        didSet{
+            fetchPreviewImage { (theFetchedImage) in
+                self.image = theFetchedImage
+            }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +32,34 @@ class SelfRefreshingImageView: UIImageView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        self.image = #imageLiteral(resourceName: "placeholder")
+        //fatalError("init(coder:) has not been implemented")
     }
-
+    
+    
+    var preViewImage : UIImage? = #imageLiteral(resourceName: "placeholder"){
+        didSet{
+            print("We have a preview Image now.. Refresh the View")
+        }
+    }
+    
+    func fetchPreviewImage(completionHanlder : @escaping (_ theFinalImage : UIImage?) -> ()){
+        
+        if let validPreviewURL = imageURL{
+            let theDataFetchTask = URLSession.shared.dataTask(with: validPreviewURL){(theData, theRespone, theError) in
+                
+                if theError == nil{
+                    if let validData = theData{
+                        completionHanlder(UIImage(data: validData))
+                        //self.setNeedsDisplay()
+                    }
+                }else{
+                    print("We have an error fetching the Image. \(theError)")
+                }
+            }
+            
+            theDataFetchTask.resume()
+        }
+    }
 }

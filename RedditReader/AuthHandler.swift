@@ -10,15 +10,11 @@ import Foundation
 import UIKit
 
 protocol AuthHandler {
-    //func authorizeUser(completionHanlder : (accessToken : String?, userInfo : [String:AnyObject?], error : AuthErrorCode?))
-    func authorizeUser(completionHanlder : @escaping (_ accessToken : String?, _ userInfo : [String:AnyObject?], _ error : AuthErrorCode?) -> ())
 
+    func authorizeUser(completionHanlder : @escaping (_ accessToken : String?, _ userInfo : [String:AnyObject?], _ error : AuthErrorCode?) -> ())
     func signOutUser() -> AuthErrorCode?
     
-    //func fetchJSONForURL(theURL : URL, completionHandler :  @escaping (_ result : [String : AnyObject]?) -> ())
-    //func fetchJSONForURLWithUserAuth(theURL : URL, requiresUserName : Bool, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ())
     func fetchJSONForURLWithUserAuth(theURL : URL, requiresUserName : Bool, completionHandler : @escaping (_ result : [String : AnyObject]?, _ userInfo : UserInfo) -> ())
-
 
     func fetchJSONForURLNoUserAuthRequired(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ())
     

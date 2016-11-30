@@ -11,5 +11,4 @@ import Foundation
 enum AuthErrorCode : Error {
     case authorizationFailed
     case authorizationAlreadyInProgress
-
 }

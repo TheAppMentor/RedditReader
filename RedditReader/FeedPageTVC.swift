@@ -29,6 +29,8 @@ class FeedPageTableViewController: UITableViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(FeedPageTableViewController.updateUI(_:)), name: NSNotification.Name(rawValue: "NewFeedAvailable"), object: nil)
         
+//        storyList = FeedStoryList().allStories()
+        
         //RedditFetcher.sharedFetcher.fetchJSONFromReddit(theRequest!)
         
 //        let theEnum = RedditAPIHandler.hot
@@ -80,12 +82,14 @@ class FeedPageTableViewController: UITableViewController {
         if let theThumbnailImageURL =  storyList[(indexPath as NSIndexPath).row].previewImageURL {
             theCell = tableView.dequeueReusableCell(withIdentifier: "previewImageCell")!
             // Populate the Image
-            if let thePreviewImage = theCell.viewWithTag(99) as? UIImageView{
-                thePreviewImage.image = UIImage(named: "placeholder")
+            if let thePreviewImageView = theCell.viewWithTag(99) as? UIImageView{
+                thePreviewImageView.image = storyList[(indexPath as NSIndexPath).row].preViewImage
+                                
+//                thePreviewImage.image = UIImage(named: "placeholder")
                 
-                if let theImageData = try? Data(contentsOf: theThumbnailImageURL as URL){
-                        thePreviewImage.image = UIImage(data:theImageData)
-                    }
+//                if let theImageData = try? Data(contentsOf: theThumbnailImageURL as URL){
+//                        thePreviewImage.image = UIImage(data:theImageData)
+//                    }
                 }
         }
         

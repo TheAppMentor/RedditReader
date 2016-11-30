@@ -10,15 +10,12 @@ import Foundation
 import p2_OAuth2
 
 class RedditAuthHandler : AuthHandler {
-
-
-
     
     static let sharedAuthHandler : RedditAuthHandler = RedditAuthHandler()
     
     var authorizeContext : AnyObject?
     
-    public func authorizeUser() -> (accessToken : String?, error : AuthErrorCode?){
+    func authorizeUser() -> (accessToken : String?, error : AuthErrorCode?){
         
         
         return (nil,nil)
@@ -33,8 +30,7 @@ class RedditAuthHandler : AuthHandler {
         oauth2.handleRedirectURL(theURL)
     }
     
-    
-    func authorizeUser(completionHanlder : @escaping (_ accessToken : String?, _ userInfo : [String:AnyObject?], _ error : AuthErrorCode?) -> ()){        
+    func authorizeUser(completionHanlder : @escaping (_ accessToken : String?, _ userInfo : [String:AnyObject?], _ error : AuthErrorCode?) -> ()){
         
         self.authorizeUserPrivate(completionHandler: {
             
@@ -43,27 +39,10 @@ class RedditAuthHandler : AuthHandler {
                 print("I have authorized the user.")
                 print("user information is \(theUserInfoDict)")
                 
-                
                 completionHanlder("Access Toekn.... ", [String:AnyObject?](), nil)
             })
         })
     }
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -100,7 +79,7 @@ class RedditAuthHandler : AuthHandler {
     }
     
     func fetchJSONForURLWithUserAuth(theURL : URL, requiresUserName : Bool, completionHandler : @escaping (_ result : [String : AnyObject]?, _ userInfo : UserInfo) -> ()){
-
+        
         var returnDict = [String:AnyObject]()
         
         self.authorizeUserPrivate(completionHandler: {
@@ -112,11 +91,11 @@ class RedditAuthHandler : AuthHandler {
                 if requiresUserName == true{
                     print("This fello requires User name Substitution.... ")
                     print("Old URL is : \(theURL)")
-
+                    
                     let theURLWithUsername = String(describing: theURL)
-                   requestURL = URL(string: theURLWithUsername.replacingOccurrences(of: "username", with: userInfoFetched.name!))!
+                    requestURL = URL(string: theURLWithUsername.replacingOccurrences(of: "username", with: userInfoFetched.name!))!
                     print("New URL is : \(requestURL)")
-
+                    
                 }
                 
                 var req = self.oauth2.request(forURL: requestURL)
@@ -147,7 +126,7 @@ class RedditAuthHandler : AuthHandler {
         })
     }
     
-
+    
     func fetchJSONForURLNoUserAuthRequired(theURL : URL, completionHandler : @escaping (_ result : [String : AnyObject]?) -> ()){
         
         var returnDict = [String:AnyObject]()
@@ -185,7 +164,7 @@ class RedditAuthHandler : AuthHandler {
             })
         })
     }
-
+    
     
     
     
@@ -201,16 +180,16 @@ class RedditAuthHandler : AuthHandler {
     
     // Private functions/Properties.
     
-//    var authorizedUserDetails : [String:AnyObject?]?{
-//        if authorizedUserDetailsStore != nil{
-//            return authorizedUserDetailsStore
-//        }
-//        
-//        authorizedUserDetailsStore = fetchUseInformation()
-//        
-//    }
-//    
-//    private var authorizedUserDetailsStore : [String : AnyObject?]?
+    //    var authorizedUserDetails : [String:AnyObject?]?{
+    //        if authorizedUserDetailsStore != nil{
+    //            return authorizedUserDetailsStore
+    //        }
+    //
+    //        authorizedUserDetailsStore = fetchUseInformation()
+    //
+    //    }
+    //
+    //    private var authorizedUserDetailsStore : [String : AnyObject?]?
     
     private let redditAppID = "G2Qqb3ZJVQJpzw"
     
@@ -264,7 +243,7 @@ class RedditAuthHandler : AuthHandler {
             }
         }
     }
-
+    
 }
 
 

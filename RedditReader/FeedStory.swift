@@ -7,21 +7,56 @@
 //
 
 import UIKit
+import Foundation
 
-open class FeedStory : CustomStringConvertible{
+class FeedStory : CustomStringConvertible{
     
-    open var description: String {
+     var description: String {
         return "\n\n\n Feed Story  --> \n \t Title      : \(title)\n \t Type       : \(type)\n \t URL        : \(url)\n \t Preview    : \(previewImageURL)\n \t Score      : \(score)\n \t Comments   : \(comments)"
     }
     
     var title : String
     var type : StoryType
     var url : URL
-    var previewImageURL : URL?
     var score : Int
     var comments : Int
     var subreddit : String
     var storyURL : URL?
+    
+    var previewImageURL : URL? {
+        didSet {
+            if previewImageURL != nil{
+                fetchPreviewImage {(theFinalImage) in
+                    self.preViewImage = theFinalImage
+                }
+            }
+        }
+    }
+    
+    var preViewImage : UIImage? = #imageLiteral(resourceName: "placeholder"){
+        didSet{
+            print("We have a preview Image now.. Refresh the View")
+        }
+    }
+    
+    func fetchPreviewImage(completionHanlder : @escaping (_ theFinalImage : UIImage?) -> ()){
+        
+        if let validPreviewURL = previewImageURL{
+            let theDataFetchTask = URLSession.shared.dataTask(with: validPreviewURL){(theData, theRespone, theError) in
+                
+                if theError == nil{
+                    if let validData = theData{
+                        completionHanlder(UIImage(data: validData))
+                    }
+                }else{
+                    print("We have an error fetching the Image. \(theError)")
+                }
+            }
+            
+            theDataFetchTask.resume()
+        }
+    }
+    
     
     init(){
         title = ""
@@ -31,4 +66,5 @@ open class FeedStory : CustomStringConvertible{
         comments = 0
         subreddit = ""
     }
+    
 }

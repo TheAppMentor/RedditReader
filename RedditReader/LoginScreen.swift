@@ -46,6 +46,10 @@ class LoginScreen: UIViewController {
     
     @IBAction func GoToReddit(_ sender: Any) {
         
+        let storyList = FeedStoryList().fetchStories(feedType: .read_hot){
+            print("This is the story list talking...")
+        }
+        
         let theEnum = RedditAPIHandler.read_hot(after: "someAfter", before: "someBefore", count: 100, limit: 2, show: nil, sr_detail: false)
         //let theEnum = RedditAPIHandler.history_user_username_comments
         //let theEnum = RedditAPIHandler.mysubreddits_api_v1_me_friends_username

@@ -28,6 +28,7 @@ class LoginScreen: UIViewController {
         // Required to show the safari VC.. in the app.. instead of launching Safari Separately.
         oauth2.authConfig.authorizeEmbedded = true
         oauth2.authConfig.authorizeContext = self
+                
         
         oauth2.authorize() { authParameters, error in
             if let params = authParameters {

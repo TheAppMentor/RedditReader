@@ -25,6 +25,7 @@
 		2FCF54F01D3FE33C0063C180 /* FeedStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCF54EF1D3FE33C0063C180 /* FeedStory.swift */; };
 		2FCF54F21D3FE34E0063C180 /* FeedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCF54F11D3FE34E0063C180 /* FeedType.swift */; };
 		83EAA69DB1F150422B42E7A5 /* Pods_RedditReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F42572FC80224CF8605325 /* Pods_RedditReader.framework */; };
+		8834061B1E57FE460044184E /* TwitterAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8834061A1E57FE460044184E /* TwitterAuthHandler.swift */; };
 		88C8083B1D3EA18D00501729 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C8083A1D3EA18D00501729 /* AppDelegate.swift */; };
 		88C808401D3EA18D00501729 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88C8083E1D3EA18D00501729 /* Main.storyboard */; };
 		88C808421D3EA18D00501729 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88C808411D3EA18D00501729 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		2FCF54EF1D3FE33C0063C180 /* FeedStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedStory.swift; sourceTree = "<group>"; };
 		2FCF54F11D3FE34E0063C180 /* FeedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedType.swift; sourceTree = "<group>"; };
 		3A920CE00C9DD1900C8F4ACD /* Pods-RedditReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-RedditReader/Pods-RedditReader.release.xcconfig"; sourceTree = "<group>"; };
+		8834061A1E57FE460044184E /* TwitterAuthHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAuthHandler.swift; sourceTree = "<group>"; };
 		88C808371D3EA18D00501729 /* RedditReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88C8083A1D3EA18D00501729 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88C8083F1D3EA18D00501729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				2FA5ABF01DE35AD500FE3639 /* RedditAuthHandler.swift */,
+				8834061A1E57FE460044184E /* TwitterAuthHandler.swift */,
 				2FA5ABF21DE35B1500FE3639 /* AuthHandler.swift */,
 				2FA5ABF41DE35BB900FE3639 /* AuthErrorCode.swift */,
 				2F7741521DDEDCD700F19E02 /* RedditApiLookup.plist */,
@@ -328,6 +331,7 @@
 				2FA5ABF31DE35B1500FE3639 /* AuthHandler.swift in Sources */,
 				2FA5ABF11DE35AD500FE3639 /* RedditAuthHandler.swift in Sources */,
 				2FCF54F01D3FE33C0063C180 /* FeedStory.swift in Sources */,
+				8834061B1E57FE460044184E /* TwitterAuthHandler.swift in Sources */,
 				2F7741551DDEEF6C00F19E02 /* RedAPIHandler.swift in Sources */,
 				2FCF54F21D3FE34E0063C180 /* FeedType.swift in Sources */,
 				2F8F19741D42995D00929215 /* LeftSlideMenuTVC.swift in Sources */,

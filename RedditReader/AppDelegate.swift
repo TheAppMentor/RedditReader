@@ -20,15 +20,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        
         oauth2 = OAuth2CodeGrant(settings: [
-            "client_id": "G2Qqb3ZJVQJpzw",
-            "client_secret": "",
-            "authorize_uri": "https://www.reddit.com/api/v1/authorize/.compact",
-            "token_uri": "https://www.reddit.com/api/v1/access_token",
-            "scope": "identity,edit,flair,history,mysubreddits,privatemessages,read,report,save,submit,subscribe,vote,wikiedit,wikiread",      // comma-separated, not space-separated scopes!
+            "client_id": "hKzEWqGuyteEUij8ljR39Q",
+            "client_secret": "VEHTsajEWQC2R4Kq9yJpYm9ij81yz27Ihv2k73PbNP8JKLPTiP",
+            "authorize_uri": "https://api.twitter.com/oauth2/token",
+            "token_uri": "https://api.twitter.com/oauth/request_token",
+            "scope": "",      // comma-separated, not space-separated scopes!
             "redirect_uris": ["birdland://prash"],   // register scheme in Info.plist
-            "parameters": ["duration": "permanent"],
+            "parameters": ["grant_type" : "client_credentials"],
             ])
+        
+//        oauth2 = OAuth2CodeGrant(settings: [
+//            "client_id": "G2Qqb3ZJVQJpzw",
+//            "client_secret": "",
+//            "authorize_uri": "https://www.reddit.com/api/v1/authorize/.compact",
+//            "token_uri": "https://www.reddit.com/api/v1/access_token",
+//            "scope": "identity,edit,flair,history,mysubreddits,privatemessages,read,report,save,submit,subscribe,vote,wikiedit,wikiread",      // comma-separated, not space-separated scopes!
+//            "redirect_uris": ["birdland://prash"],   // register scheme in Info.plist
+//            "parameters": ["duration": "permanent"],
+//            ])
         
         //modconfig,modflair,modlog,modposts,modwiki,mysubreddits,privatemessages,read,report,save,submit,subscribe,vote,wikiedit,wikiread
         

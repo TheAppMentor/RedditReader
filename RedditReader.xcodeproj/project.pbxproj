@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F01DD001E60AF4A00612A41 /* RedditAPIParmBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F01DCFC1E60AF4A00612A41 /* RedditAPIParmBuilder.swift */; };
+		2F01DD011E60AF4A00612A41 /* RedditAPIParmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F01DCFD1E60AF4A00612A41 /* RedditAPIParmType.swift */; };
+		2F01DD021E60AF4A00612A41 /* RedditAPIToParmMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F01DCFE1E60AF4A00612A41 /* RedditAPIToParmMap.swift */; };
+		2F01DD031E60AF4A00612A41 /* RedditInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F01DCFF1E60AF4A00612A41 /* RedditInterface.swift */; };
 		2F1AAFE31DED6F7E0000AEEC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1AAFE21DED6F7E0000AEEC /* UserInfo.swift */; };
 		2F1AAFE71DEDEC080000AEEC /* FeedStoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1AAFE61DEDEC080000AEEC /* FeedStoryList.swift */; };
 		2F1AAFE91DEE04910000AEEC /* SelfRefreshingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1AAFE81DEE04910000AEEC /* SelfRefreshingImageView.swift */; };
@@ -32,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F01DCFC1E60AF4A00612A41 /* RedditAPIParmBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditAPIParmBuilder.swift; sourceTree = "<group>"; };
+		2F01DCFD1E60AF4A00612A41 /* RedditAPIParmType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditAPIParmType.swift; sourceTree = "<group>"; };
+		2F01DCFE1E60AF4A00612A41 /* RedditAPIToParmMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditAPIToParmMap.swift; sourceTree = "<group>"; };
+		2F01DCFF1E60AF4A00612A41 /* RedditInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditInterface.swift; sourceTree = "<group>"; };
 		2F1AAFE21DED6F7E0000AEEC /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2F1AAFE61DEDEC080000AEEC /* FeedStoryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedStoryList.swift; sourceTree = "<group>"; };
 		2F1AAFE81DEE04910000AEEC /* SelfRefreshingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfRefreshingImageView.swift; sourceTree = "<group>"; };
@@ -172,6 +180,10 @@
 		88C808391D3EA18D00501729 /* RedditReader */ = {
 			isa = PBXGroup;
 			children = (
+				2F01DCFC1E60AF4A00612A41 /* RedditAPIParmBuilder.swift */,
+				2F01DCFD1E60AF4A00612A41 /* RedditAPIParmType.swift */,
+				2F01DCFE1E60AF4A00612A41 /* RedditAPIToParmMap.swift */,
+				2F01DCFF1E60AF4A00612A41 /* RedditInterface.swift */,
 				2F1AAFE41DED9CD60000AEEC /* RedAPIHandler */,
 				2F56CD081DD0756A0029F6F3 /* Project Files */,
 				2F56CD071DD075500029F6F3 /* Model/Utility Classes */,
@@ -320,12 +332,15 @@
 			files = (
 				2FA5ABF51DE35BB900FE3639 /* AuthErrorCode.swift in Sources */,
 				2FCF54EE1D3FE3240063C180 /* RedditFetcher.swift in Sources */,
+				2F01DD001E60AF4A00612A41 /* RedditAPIParmBuilder.swift in Sources */,
 				2F5AED1F1D4131180092243F /* StoryDetailVC.swift in Sources */,
+				2F01DD011E60AF4A00612A41 /* RedditAPIParmType.swift in Sources */,
 				2FCF54EC1D3FA9FC0063C180 /* FeedPageTVC.swift in Sources */,
 				88C8083B1D3EA18D00501729 /* AppDelegate.swift in Sources */,
 				2F1AAFE71DEDEC080000AEEC /* FeedStoryList.swift in Sources */,
 				2F5AED1D1D4129B90092243F /* TheNavController.swift in Sources */,
 				2FA5ABF31DE35B1500FE3639 /* AuthHandler.swift in Sources */,
+				2F01DD021E60AF4A00612A41 /* RedditAPIToParmMap.swift in Sources */,
 				2FA5ABF11DE35AD500FE3639 /* RedditAuthHandler.swift in Sources */,
 				2FCF54F01D3FE33C0063C180 /* FeedStory.swift in Sources */,
 				2F7741551DDEEF6C00F19E02 /* RedAPIHandler.swift in Sources */,
@@ -333,6 +348,7 @@
 				2F8F19741D42995D00929215 /* LeftSlideMenuTVC.swift in Sources */,
 				2F1AAFE91DEE04910000AEEC /* SelfRefreshingImageView.swift in Sources */,
 				2F1AAFE31DED6F7E0000AEEC /* UserInfo.swift in Sources */,
+				2F01DD031E60AF4A00612A41 /* RedditInterface.swift in Sources */,
 				2F1AAFEB1DEEA20D0000AEEC /* NotificationObservingImageView.swift in Sources */,
 				2F8ED8351DDD88930087A77B /* LoginScreen.swift in Sources */,
 			);

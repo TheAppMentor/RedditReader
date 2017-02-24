@@ -10,11 +10,17 @@ import Foundation
 
 struct FeedStoryList {
     
+    var apiParmList = ["read_hot":["after","before","count","limit","show","sr_detail"]]
     
-    func  fetchStories(feedType : RedditAPIHandler, completionHandler : () -> ()){
+    
+    func  fetchStories(feedType : RedditInterface, completionHandler : () -> ()){
 
+        let parmList = RedditAPIToParmMap.parameterList(feedType: feedType)
         
+        //let redAPIHandler = RedditAPIHandler.read_hot(after: <#T##String?#>, before: <#T##String?#>, count: <#T##Int?#>, limit: <#T##Int?#>, show: <#T##String?#>, sr_detail: <#T##Bool?#>)
     }
+    
+    
     
     func allStories() -> [FeedStory] {
         return stories
@@ -36,7 +42,67 @@ struct FeedStoryList {
         completionHandler()
     }
     
+    func buildParmString(parmList : [RedditAPIParmType]) -> String? {
+        
+        var parmString = ""
+        
+        for eachParm in parmList{
+            switch eachParm {
+            case .after:
+                print("Processing \(eachParm)")
+                return nextStoryListID ?? nil
+            case .before:
+                print("Processing \(eachParm)")
+                return previousStoryListID
+            case .limit:
+                print("Processing \(eachParm)")
+                return limitParamterForURL
+            case .count:
+                print("Processing \(eachParm)")
+            case .show:
+                print("Processing \(eachParm)")
+            case .sr_detail:
+                print("Processing \(eachParm)")
+            }
+        }
+        return nil
+    }
     
+    
+    func buildParmURLForAfter() -> String? {
+        
+        return nil
+    }
+
+    
+    func buildParmURLForBefore() -> String? {
+        
+        return nil
+    }
+
+    
+    func buildParmURLForLimit() -> String? {
+        
+        return nil
+    }
+
+    
+    func buildParmURLForCount() -> String? {
+        
+        return nil
+    }
+
+    func buildParmURLForShow() -> String? {
+        
+        return nil
+    }
+
+    func buildParmURLForSubRedditDetail() -> String? {
+        
+        
+        return nil
+    }
+
     
     private var isFirstFetch : Bool{
         if allStories().count > 0 {
@@ -56,25 +122,25 @@ struct FeedStoryList {
         return "/limit=\(fetchLimit)"
     }
     
+    private var afterParamterForURL : String{
+        return "after=\(nextStoryListID)"
+    }
+
+    private var beforeParamterForURL : String{
+        return "before=\(nextStoryListID)"
+    }
     
+    private var nextStoryListID : String?
+
+    private var previousStoryListID : String?
     
-    
-    
-    
-    
-    
-    
-    
-    
+    init() {}
     
     private var stories = [FeedStory]()
     
     init(storyFeedDict : [String:AnyObject?]) {
         stories = jsonParser(storyFeedDict)
     }
-    
-    private var nextStoryListID : String?
-    private var previousStoryListID : String?
     
     mutating func jsonParser(_ theJSON : [String:AnyObject?]) -> [FeedStory]{
         

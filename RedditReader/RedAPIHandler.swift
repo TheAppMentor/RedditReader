@@ -151,6 +151,8 @@ enum RedditAPIHandler{
     case wikiread_wiki_page
     
     
+    
+    
     func fetchData(sender : AnyObject, completionHandler : @escaping (_ theResponse : [String:AnyObject?]) -> ()) {
         
         if let validURL = self.getURL(){
@@ -180,6 +182,8 @@ enum RedditAPIHandler{
             }
         }
     }
+    
+    
     
     private func getURL() -> URL? {
         
